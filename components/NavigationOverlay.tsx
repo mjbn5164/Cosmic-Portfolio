@@ -185,6 +185,10 @@ export default function NavigationOverlay() {
     }
   };
 
+  const openLink = (url: string) => {
+    window.open(url, '_blank');
+  };
+
   return (
     <>
       <audio 
@@ -371,16 +375,14 @@ export default function NavigationOverlay() {
           
           <div className="episode-list">
             {podcastEpisodes.map((ep, i) => (
-              <a 
+              <button 
                 key={i} 
-                href={ep.url} 
-                target="_blank"
-                rel="noreferrer" 
+                onClick={() => openLink(ep.url)}
                 className="cosmic-button" 
                 style={{ width: '100%', '--glow': 'rgba(34, 204, 255, 0.6)', justifyContent: 'center' } as React.CSSProperties}
               >
                 {ep.title}
-              </a>
+              </button>
             ))}
           </div>
 
@@ -396,16 +398,14 @@ export default function NavigationOverlay() {
           
           <div className="episode-list">
             {videoItems.map((item, i) => (
-              <a 
+              <button 
                 key={i} 
-                href={item.url} 
-                target="_blank"
-                rel="noreferrer" 
+                onClick={() => openLink(item.url)}
                 className="cosmic-button" 
                 style={{ width: '100%', '--glow': 'rgba(255, 69, 0, 0.8)', justifyContent: 'center' } as React.CSSProperties}
               >
                 {item.title}
-              </a>
+              </button>
             ))}
           </div>
 
@@ -421,11 +421,9 @@ export default function NavigationOverlay() {
           
           <div className="episode-list">
             {studentVideoItems.map((item, i) => (
-              <a 
+              <button 
                 key={i} 
-                href={item.url} 
-                target="_blank"
-                rel="noreferrer" 
+                onClick={() => openLink(item.url)}
                 className="cosmic-button" 
                 style={{ 
                   width: '100%', 
@@ -439,7 +437,7 @@ export default function NavigationOverlay() {
                 } as React.CSSProperties}
               >
                 {item.title}
-              </a>
+              </button>
             ))}
           </div>
 
@@ -455,11 +453,9 @@ export default function NavigationOverlay() {
           
           <div className="episode-list">
             {gameItems.map((item, i) => (
-              <a 
+              <button 
                 key={i} 
-                href={item.url} 
-                target="_blank"
-                rel="noreferrer" 
+                onClick={() => openLink(item.url)}
                 className="cosmic-button" 
                 style={{ 
                   width: '100%', 
@@ -473,7 +469,7 @@ export default function NavigationOverlay() {
                 } as React.CSSProperties}
               >
                 {item.title}
-              </a>
+              </button>
             ))}
           </div>
 
