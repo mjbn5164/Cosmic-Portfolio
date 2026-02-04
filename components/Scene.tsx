@@ -5,6 +5,7 @@ import { Group, ShaderMaterial, Vector3 } from 'three';
 import gsap from 'gsap';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import { Planet } from './Planet';
+import Stars from './Constellations';
 import '../types';
 
 // Custom Nebula Component
@@ -61,58 +62,6 @@ const Nebula: React.FC = () => {
   );
 };
 
-const StarField: React.FC = () => {
-  const count = 3000; 
-  const materialRef = useRef<ShaderMaterial>(null);
-  const { positions, sizes, shifts } = useMemo(() => {
-    const positions = new Float32Array(count * 3);
-    const sizes = new Float32Array(count);
-    const shifts = new Float32Array(count);
-    for (let i = 0; i < count; i++) {
-      const r = 200; 
-      const theta = 2 * Math.PI * Math.random();
-      const phi = Math.acos(2 * Math.random() - 1);
-      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      positions[i * 3 + 2] = r * Math.cos(phi);
-      sizes[i] = Math.random() * 1.5 + 0.5;
-      shifts[i] = Math.random() * Math.PI;
-    }
-    return { positions, sizes, shifts };
-  }, []);
-  useFrame((state) => { if (materialRef.current) materialRef.current.uniforms.uTime.value = state.clock.elapsedTime; });
-  const uniforms = useMemo(() => ({ uTime: { value: 0 } }), []);
-  const vertexShader = `
-    uniform float uTime; attribute float aSize; attribute float aShift; varying float vAlpha;
-    void main() {
-      vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-      gl_PointSize = aSize * (300.0 / -mvPosition.z);
-      gl_Position = projectionMatrix * mvPosition;
-      float blink = sin(uTime * 0.5 + aShift);
-      vAlpha = 0.5 + 0.5 * blink; 
-    }
-  `;
-  const fragmentShader = `
-    varying float vAlpha;
-    void main() {
-      float r = distance(gl_PointCoord, vec2(0.5));
-      if (r > 0.5) discard;
-      float glow = 1.0 - (r * 2.0); glow = pow(glow, 1.5);
-      gl_FragColor = vec4(1.0, 1.0, 1.0, vAlpha * glow);
-    }
-  `;
-  return (
-    <points>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
-        <bufferAttribute attach="attributes-aSize" count={count} array={sizes} itemSize={1} />
-        <bufferAttribute attach="attributes-aShift" count={count} array={shifts} itemSize={1} />
-      </bufferGeometry>
-      <shaderMaterial ref={materialRef} transparent depthWrite={false} uniforms={uniforms} vertexShader={vertexShader} fragmentShader={fragmentShader} />
-    </points>
-  );
-};
-
 const SceneContent: React.FC = () => {
   const scroll = useScroll();
   const { camera } = useThree();
@@ -150,14 +99,14 @@ const SceneContent: React.FC = () => {
     camera.position.x = 0;
     camera.position.y = 0;
     
-    if (starsRef.current) { starsRef.current.position.z = camera.position.z * 0.95; starsRef.current.rotation.z += 0.00005; }
+    if (starsRef.current) { starsRef.current.position.z = camera.position.z * 0.95; }
     if (nebulaRef.current) { nebulaRef.current.position.z = camera.position.z * 0.95; }
   });
 
   return (
     <>
       <group ref={nebulaRef}><Nebula /></group>
-      <group ref={starsRef}><StarField /></group>
+      <group ref={starsRef}><Stars /></group>
 
       <ambientLight intensity={1.0} />
       <directionalLight position={[0, 10, 50]} intensity={1.5} color="#ffffff" />
