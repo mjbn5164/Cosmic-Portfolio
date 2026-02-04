@@ -370,7 +370,7 @@ export default function NavigationOverlay() {
       {/* OVERLAY DE PODCAST (TERRA) */}
       <div className="earth-overlay">
         <div className="podcast-box">
-          <h2 style={{ letterSpacing: '1rem', fontSize: '1.8rem', marginBottom: '5px' }}>EARTH</h2>
+          <h2 style={{ letterSpacing: '1rem', fontSize: '1.8rem', marginBottom: '5px' }}>GAIA</h2>
           <p style={{ fontSize: '9px', opacity: 0.6, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '40px' }}>Transmissões da Biosfera</p>
           
           <div className="episode-list">
@@ -393,7 +393,7 @@ export default function NavigationOverlay() {
       {/* OVERLAY DE VÍDEOS (MARTE) */}
       <div className="mars-overlay">
         <div className="podcast-box">
-          <h2 style={{ letterSpacing: '1rem', fontSize: '1.8rem', marginBottom: '5px', color: '#ff4500' }}>MARS</h2>
+          <h2 style={{ letterSpacing: '1rem', fontSize: '1.8rem', marginBottom: '5px', color: '#ff4500' }}>MARTE</h2>
           <p style={{ fontSize: '9px', opacity: 0.6, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '40px' }}>Arquivos Visuais</p>
           
           <div className="episode-list">
@@ -485,7 +485,15 @@ export default function NavigationOverlay() {
           alt="Paisagem de Marte" 
           style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -1 }}
         />
-        <div className="podcast-box">
+        <div 
+            className="podcast-box" 
+            style={{ 
+                background: 'rgba(0, 0, 0, 0.05)', 
+                backdropFilter: 'none', 
+                border: 'none', 
+                boxShadow: 'none' 
+            }}
+        >
           <h2 style={{ letterSpacing: '1rem', fontSize: '1.8rem', marginBottom: '5px', color: '#afeeee' }}>EM CONSTRUÇÃO</h2>
           <p style={{ fontSize: '9px', opacity: 0.6, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '40px' }}>Exploração Futura</p>
           
