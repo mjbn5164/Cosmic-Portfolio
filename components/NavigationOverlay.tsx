@@ -18,12 +18,14 @@ const podcastEpisodes = [
 ];
 
 const videoItems = [
-  { title: "01 - Banda Desenhada - Vida e Obra do Dr. Hernâni Cidade", url: "https://youtu.be/VtQXm3k-ot4" }
+  { title: "01 - Feliz Natal, alumni!", url: "https://youtu.be/VatEyRKtvRs" },
+  { title: "02 - Banda Desenhada - Vida e Obra do Dr. Hernâni Cidade", url: "https://youtu.be/VtQXm3k-ot4" }
 ];
 
 const studentVideoItems = [
   { title: "01 - Sofia Zhuo - Metais da Tabela Periódica: Suas Propriedades e Aplicações", url: "https://youtu.be/_oWNXtW7n_A" },
-  { title: "02 - Sofia Zhuo - Metais: Degradação, Proteção e Complexos", url: "https://youtu.be/TAb5-tRDndg" }
+  { title: "02 - Sofia Zhuo - Metais: Degradação, Proteção e Complexos", url: "https://youtu.be/TAb5-tRDndg" },
+  { title: "03 - SOFIA ZHUO - SCC DR. HERNÂNI CIDADE (2026) - HIDROGÉNIO VERDE", url: "https://youtu.be/lhR2mSZyCyo" }
 ];
 
 const gameItems = [
@@ -46,8 +48,9 @@ export default function NavigationOverlay() {
   // Estado para lembrar se a música estava a tocar antes de abrir um menu
   const [wasPlayingBeforeMenu, setWasPlayingBeforeMenu] = useState(false);
 
-  // CORREÇÃO: Usar ficheiro local diretamente
-  const [audioSrc, setAudioSrc] = useState("/musica.mp3");
+  // CORREÇÃO: Usar URL externo fiável (Google Sounds) pois o ficheiro local pode não existir
+  // "Space Station Ambience" é perfeito para o tema
+  const [audioSrc, setAudioSrc] = useState("https://actions.google.com/sounds/v1/science_fiction/space_station_ambience.ogg");
   
   const audioRef = useRef<HTMLAudioElement>(null);
   const fadeIntervalRef = useRef<number | null>(null);
@@ -60,6 +63,11 @@ export default function NavigationOverlay() {
 
     // Limpa intervalo anterior se existir
     if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+
+    // Se o áudio estiver parado ou sem source carregado, tenta carregar
+    if (audio.readyState === 0) {
+        audio.load();
+    }
 
     audio.volume = 0;
     audio.play().then(() => {
@@ -79,7 +87,10 @@ export default function NavigationOverlay() {
           if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
         }
       }, stepTime);
-    }).catch(e => console.error("Erro ao iniciar áudio:", e));
+    }).catch(e => {
+        console.error("Erro ao iniciar áudio:", e);
+        setIsPlaying(false);
+    });
   };
 
   const stopAudio = () => {
@@ -98,7 +109,7 @@ export default function NavigationOverlay() {
     // 2. Audio Initialization (Volume começa a 0 para o fade funcionar)
     if (audioRef.current) {
         audioRef.current.volume = 0; 
-        audioRef.current.load();
+        // Não chamamos load() aqui automaticamente para evitar erro de autoplay bloqueado antes da interação
     }
 
     // 3. Planet Scroll Logic
@@ -196,13 +207,19 @@ export default function NavigationOverlay() {
         src={audioSrc}
         loop 
         preload="auto"
+        crossOrigin="anonymous"
         onError={(e) => {
-          console.warn(`Erro no carregamento do áudio local (${audioSrc}):`, e.currentTarget.error?.message);
+          // Apenas warn se houver erro real, não interrompe a app
+          console.warn(`Audio load warning: ${e.currentTarget.error?.message || 'Unknown error'}`);
         }}
       />
 
       <style>{`
-        .ui-fixed-container { position: fixed; top: 60px; right: 40px; display: flex; flex-direction: column; gap: 15px; z-index: 10000; pointer-events: none; }
+        .ui-fixed-container { 
+            position: fixed; top: 60px; right: 40px; 
+            display: flex; flex-direction: column; gap: 15px; 
+            z-index: 10000; pointer-events: none; 
+        }
         
         .cosmic-button {
           pointer-events: all; position: relative; width: 240px; height: 48px;
@@ -218,76 +235,6 @@ export default function NavigationOverlay() {
         .cosmic-button:hover { background: rgba(255, 255, 255, 0.1); }
         .btn-icon { position: absolute; left: 18px; opacity: 0.6; }
 
-        /* Overlay da Terra (Podcast) */
-        .earth-overlay {
-          position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-          background: black url('/paisagem_Terra.png') no-repeat center center;
-          background-size: cover;
-          z-index: 20000; display: flex; align-items: center; justify-content: center;
-          
-          /* Visibilidade e transição */
-          opacity: ${isPodcastOpen ? '1' : '0'};
-          visibility: ${isPodcastOpen ? 'visible' : 'hidden'};
-          pointer-events: ${isPodcastOpen ? 'auto' : 'none'};
-          transition: opacity 1s ease-in-out, visibility 0s linear ${isPodcastOpen ? '0s' : '1s'};
-        }
-
-        /* Overlay de Marte (Vídeos) */
-        .mars-overlay {
-          position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-          /* Gradiente vermelho escuro para simular Marte */
-          background: radial-gradient(circle at center, #3a1103 0%, #000000 90%);
-          z-index: 20000; display: flex; align-items: center; justify-content: center;
-          
-          /* Visibilidade e transição */
-          opacity: ${isVideoOpen ? '1' : '0'};
-          visibility: ${isVideoOpen ? 'visible' : 'hidden'};
-          pointer-events: ${isVideoOpen ? 'auto' : 'none'};
-          transition: opacity 1s ease-in-out, visibility 0s linear ${isVideoOpen ? '0s' : '1s'};
-        }
-
-        /* Overlay de Júpiter (Vídeos: Alunos) */
-        .jupiter-overlay {
-          position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-          /* Gradiente bege/castanho para simular Júpiter */
-          background: radial-gradient(circle at center, #8b6c42 0%, #2b1d0e 60%, #000000 90%);
-          z-index: 20000; display: flex; align-items: center; justify-content: center;
-          
-          /* Visibilidade e transição */
-          opacity: ${isStudentVideoOpen ? '1' : '0'};
-          visibility: ${isStudentVideoOpen ? 'visible' : 'hidden'};
-          pointer-events: ${isStudentVideoOpen ? 'auto' : 'none'};
-          transition: opacity 1s ease-in-out, visibility 0s linear ${isStudentVideoOpen ? '0s' : '1s'};
-        }
-
-        /* Overlay de Saturno (Jogos) */
-        .saturn-overlay {
-          position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-          /* Gradiente dourado/pálido para Saturno */
-          background: radial-gradient(circle at center, #dfd0b5 0%, #3e3b32 60%, #000000 90%);
-          z-index: 20000; display: flex; align-items: center; justify-content: center;
-          
-          /* Visibilidade e transição */
-          opacity: ${isGamesOpen ? '1' : '0'};
-          visibility: ${isGamesOpen ? 'visible' : 'hidden'};
-          pointer-events: ${isGamesOpen ? 'auto' : 'none'};
-          transition: opacity 1s ease-in-out, visibility 0s linear ${isGamesOpen ? '0s' : '1s'};
-        }
-
-        /* Overlay de Construção (Urano/Imagem Pedida) */
-        .construction-overlay {
-          position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-          /* background removido em favor da tag img direta para melhor carregamento */
-          background: transparent;
-          z-index: 20000; display: flex; align-items: center; justify-content: center;
-          
-          /* Visibilidade e transição */
-          opacity: ${isConstructionOpen ? '1' : '0'};
-          visibility: ${isConstructionOpen ? 'visible' : 'hidden'};
-          pointer-events: ${isConstructionOpen ? 'auto' : 'none'};
-          transition: opacity 1s ease-in-out, visibility 0s linear ${isConstructionOpen ? '0s' : '1s'};
-        }
-
         .podcast-box {
           background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(25px);
           padding: 60px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);
@@ -295,6 +242,7 @@ export default function NavigationOverlay() {
           width: 90%; max-width: 600px;
           box-shadow: 0 20px 50px rgba(0,0,0,0.8);
           display: flex; flex-direction: column; align-items: center;
+          max-height: 85vh; overflow-y: auto; /* Scroll se for muito alto no mobile */
         }
 
         .episode-list {
@@ -307,6 +255,94 @@ export default function NavigationOverlay() {
           text-transform: uppercase; letter-spacing: 3px; border: none; transition: 0.3s;
         }
         .back-btn:hover { background: #ffcc00; }
+
+        /* --- RESPONSIVIDADE MOBILE --- */
+        @media (max-width: 768px) {
+            .ui-fixed-container {
+                top: auto;
+                bottom: 20px;
+                right: 20px;
+                gap: 8px;
+            }
+            
+            .cosmic-button {
+                width: 180px; /* Botões mais pequenos */
+                height: 40px;
+                font-size: 9px;
+                letter-spacing: 0.1rem;
+            }
+            
+            .podcast-box {
+                padding: 30px 20px;
+                width: 95%;
+            }
+
+            .podcast-box h2 {
+                font-size: 1.4rem !important;
+                letter-spacing: 0.5rem !important;
+            }
+
+            .welcome-title {
+                font-size: 1.2rem !important;
+                letter-spacing: 0.8rem !important;
+            }
+        }
+
+        /* Overlay da Terra (Podcast) */
+        .earth-overlay {
+          position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+          background: black url('/paisagem_Terra.png') no-repeat center center;
+          background-size: cover;
+          z-index: 20000; display: flex; align-items: center; justify-content: center;
+          opacity: ${isPodcastOpen ? '1' : '0'};
+          visibility: ${isPodcastOpen ? 'visible' : 'hidden'};
+          pointer-events: ${isPodcastOpen ? 'auto' : 'none'};
+          transition: opacity 1s ease-in-out, visibility 0s linear ${isPodcastOpen ? '0s' : '1s'};
+        }
+
+        /* Overlay de Marte (Vídeos) */
+        .mars-overlay {
+          position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+          background: radial-gradient(circle at center, #3a1103 0%, #000000 90%);
+          z-index: 20000; display: flex; align-items: center; justify-content: center;
+          opacity: ${isVideoOpen ? '1' : '0'};
+          visibility: ${isVideoOpen ? 'visible' : 'hidden'};
+          pointer-events: ${isVideoOpen ? 'auto' : 'none'};
+          transition: opacity 1s ease-in-out, visibility 0s linear ${isVideoOpen ? '0s' : '1s'};
+        }
+
+        /* Overlay de Júpiter (Vídeos: Alunos) */
+        .jupiter-overlay {
+          position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+          background: radial-gradient(circle at center, #8b6c42 0%, #2b1d0e 60%, #000000 90%);
+          z-index: 20000; display: flex; align-items: center; justify-content: center;
+          opacity: ${isStudentVideoOpen ? '1' : '0'};
+          visibility: ${isStudentVideoOpen ? 'visible' : 'hidden'};
+          pointer-events: ${isStudentVideoOpen ? 'auto' : 'none'};
+          transition: opacity 1s ease-in-out, visibility 0s linear ${isStudentVideoOpen ? '0s' : '1s'};
+        }
+
+        /* Overlay de Saturno (Jogos) */
+        .saturn-overlay {
+          position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+          background: radial-gradient(circle at center, #dfd0b5 0%, #3e3b32 60%, #000000 90%);
+          z-index: 20000; display: flex; align-items: center; justify-content: center;
+          opacity: ${isGamesOpen ? '1' : '0'};
+          visibility: ${isGamesOpen ? 'visible' : 'hidden'};
+          pointer-events: ${isGamesOpen ? 'auto' : 'none'};
+          transition: opacity 1s ease-in-out, visibility 0s linear ${isGamesOpen ? '0s' : '1s'};
+        }
+
+        /* Overlay de Construção (Urano/Imagem Pedida) */
+        .construction-overlay {
+          position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+          background: transparent;
+          z-index: 20000; display: flex; align-items: center; justify-content: center;
+          opacity: ${isConstructionOpen ? '1' : '0'};
+          visibility: ${isConstructionOpen ? 'visible' : 'hidden'};
+          pointer-events: ${isConstructionOpen ? 'auto' : 'none'};
+          transition: opacity 1s ease-in-out, visibility 0s linear ${isConstructionOpen ? '0s' : '1s'};
+        }
 
         .welcome-screen { 
           position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 

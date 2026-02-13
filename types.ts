@@ -1,51 +1,23 @@
 import { Vector3 } from 'three';
 import React from 'react';
 
-// Global JSX Intrinsic Elements Augmentation for R3F
+// Global JSX Intrinsic Elements Augmentation
 // This fixes errors where <mesh>, <group>, etc. are not recognized as valid JSX elements.
+// Using an index signature allows any element (including standard HTML tags like div, span, etc.),
+// preventing conflicts where manual augmentation might shadow standard React types.
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      mesh: any;
-      group: any;
-      sphereGeometry: any;
-      meshPhongMaterial: any;
-      meshStandardMaterial: any;
-      meshBasicMaterial: any;
-      shaderMaterial: any;
-      ringGeometry: any;
-      planeGeometry: any;
-      points: any;
-      bufferGeometry: any;
-      bufferAttribute: any;
-      ambientLight: any;
-      directionalLight: any;
-      pointLight: any;
-      primitive: any;
+      [elemName: string]: any;
     }
   }
 }
 
-// Augment React's JSX namespace for React 18+ strict typing
+// Augment React.JSX namespace for newer React type definitions (React 18+)
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      mesh: any;
-      group: any;
-      sphereGeometry: any;
-      meshPhongMaterial: any;
-      meshStandardMaterial: any;
-      meshBasicMaterial: any;
-      shaderMaterial: any;
-      ringGeometry: any;
-      planeGeometry: any;
-      points: any;
-      bufferGeometry: any;
-      bufferAttribute: any;
-      ambientLight: any;
-      directionalLight: any;
-      pointLight: any;
-      primitive: any;
+      [elemName: string]: any;
     }
   }
 }

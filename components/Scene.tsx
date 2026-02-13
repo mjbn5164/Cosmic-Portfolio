@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, Suspense } from 'react';
+import React, { useRef, useMemo, Suspense, useEffect, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useScroll } from '@react-three/drei';
 import { Group, ShaderMaterial, Vector3 } from 'three';
@@ -12,13 +12,14 @@ import '../types';
 const Nebula: React.FC = () => {
   const materialRef = useRef<ShaderMaterial>(null);
   useFrame((state) => {
-    if (materialRef.current) materialRef.current.uniforms.uTime.value = state.clock.elapsedTime * 0.2;
+    if (materialRef.current) materialRef.current.uniforms.uTime.value = state.clock.elapsedTime * 0.1;
   });
   const uniforms = useMemo(() => ({
     uTime: { value: 0 },
-    uColor1: { value: new Vector3(0.02, 0.01, 0.05) }, 
-    uColor2: { value: new Vector3(0.18, 0.0, 0.27) },  
-    uColor3: { value: new Vector3(0.0, 0.74, 1.0) }    
+    // Paleta: Tons de Azul (Escuro, Médio, Claro)
+    uColor1: { value: new Vector3(0.0, 0.05, 0.2) },  // Azul Profundo Escuro
+    uColor2: { value: new Vector3(0.0, 0.25, 0.6) },  // Azul Médio (Royal)
+    uColor3: { value: new Vector3(0.0, 0.6, 1.0) }    // Azul Ciano Brilhante
   }), []);
   const vertexShader = `
     varying vec2 vUv;
@@ -42,20 +43,29 @@ const Nebula: React.FC = () => {
         return value;
     }
     void main() {
-        vec2 st = vUv * 3.0;
+        // Escala aumentada para manter detalhe na mesh gigante
+        vec2 st = vUv * 8.0;
         float q = fbm(st + uTime * 0.1);
         vec2 r = vec2(fbm(st + q + uTime * 0.2 + vec2(1.7, 9.2)), fbm(st + q + uTime * 0.15 + vec2(8.3, 2.8)));
         float f = fbm(st + r);
+        
         vec3 color = mix(uColor1, uColor2, clamp((f*f)*4.0, 0.0, 1.0));
         color = mix(color, uColor3, clamp(length(r.x), 0.0, 1.0));
-        float alpha = f * 0.05;
+        
+        // Aumentando o contraste para reduzir a área de cobertura (mais "buracos" negros)
+        // smoothstep(0.4, 1.0, f) significa que qualquer valor de noise abaixo de 0.4 será invisível
+        float alpha = smoothstep(0.4, 1.0, f) * 0.4;
+        
         float dist = distance(vUv, vec2(0.5));
-        alpha *= smoothstep(0.6, 0.2, dist);
+        // Vignette para suavizar bordas (mantendo o efeito full screen mas focado no centro)
+        alpha *= smoothstep(0.7, 0.1, dist);
+        
         gl_FragColor = vec4(color, alpha);
     }
   `;
   return (
-    <mesh position={[0, 0, -200]} scale={[300, 300, 1]}>
+    // Escala massiva para garantir imersão total
+    <mesh position={[0, 0, -200]} scale={[2000, 2000, 1]}>
       <planeGeometry args={[1, 1]} />
       <shaderMaterial ref={materialRef} transparent depthWrite={false} uniforms={uniforms} vertexShader={vertexShader} fragmentShader={fragmentShader} />
     </mesh>
@@ -64,14 +74,30 @@ const Nebula: React.FC = () => {
 
 const SceneContent: React.FC = () => {
   const scroll = useScroll();
-  const { camera } = useThree();
+  const { camera, size } = useThree();
   const starsRef = useRef<Group>(null);
   const nebulaRef = useRef<Group>(null);
   const sunRef = useRef<Group>(null); 
   
+  // Estado para responsividade
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const START_Z = 10;
   const END_Z = -190; 
   const TOTAL_DISTANCE = START_Z - END_Z;
+
+  // Fator de ajuste horizontal: 
+  // No mobile, reduzimos drasticamente o X para os planetas caberem no ecrã vertical
+  const xFactor = isMobile ? 0.35 : 1.0;
 
   useFrame(() => {
     const offset = scroll.offset; 
@@ -118,13 +144,14 @@ const SceneContent: React.FC = () => {
       </group>
 
       <Suspense fallback={null}>
-        <Planet position={[-3.5, -1, -25]} size={2.0} textureType="earth" />
+        {/* EARTH: Multiplicamos o X pelo xFactor para aproximar do centro no mobile */}
+        <Planet position={[-3.5 * xFactor, -1, -25]} size={2.0} textureType="earth" />
       </Suspense>
 
-      <Planet position={[4, 2, -55]} size={1.8} textureType="mars" />
-      <Planet position={[-4.5, -1.5, -90]} size={4.2} textureType="jupiter" />
-      <Planet position={[3.5, 0.5, -125]} size={2.1} textureType="saturn" />
-      <Planet position={[-3, -1, -160]} size={1.9} textureType="uranus" />
+      <Planet position={[4 * xFactor, 2, -55]} size={1.8} textureType="mars" />
+      <Planet position={[-4.5 * xFactor, -1.5, -90]} size={4.2} textureType="jupiter" />
+      <Planet position={[3.5 * xFactor, 0.5, -125]} size={2.1} textureType="saturn" />
+      <Planet position={[-3 * xFactor, -1, -160]} size={1.9} textureType="uranus" />
       
       <EffectComposer enableNormalPass={false}>
         <Bloom luminanceThreshold={0.25} mipmapBlur intensity={0.6} />
