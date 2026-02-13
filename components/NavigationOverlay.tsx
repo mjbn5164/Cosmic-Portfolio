@@ -48,9 +48,8 @@ export default function NavigationOverlay() {
   // Estado para lembrar se a música estava a tocar antes de abrir um menu
   const [wasPlayingBeforeMenu, setWasPlayingBeforeMenu] = useState(false);
 
-  // CORREÇÃO: Usar URL externo fiável (Google Sounds) pois o ficheiro local pode não existir
-  // "Space Station Ambience" é perfeito para o tema
-  const [audioSrc, setAudioSrc] = useState("https://actions.google.com/sounds/v1/science_fiction/space_station_ambience.ogg");
+  // Áudio Local conforme instrução
+  const [audioSrc] = useState("/musica.mp3");
   
   const audioRef = useRef<HTMLAudioElement>(null);
   const fadeIntervalRef = useRef<number | null>(null);
@@ -88,7 +87,7 @@ export default function NavigationOverlay() {
         }
       }, stepTime);
     }).catch(e => {
-        console.error("Erro ao iniciar áudio:", e);
+        console.error("Erro ao iniciar áudio (Autoplay block ou erro de rede):", e);
         setIsPlaying(false);
     });
   };
@@ -207,10 +206,8 @@ export default function NavigationOverlay() {
         src={audioSrc}
         loop 
         preload="auto"
-        crossOrigin="anonymous"
         onError={(e) => {
-          // Apenas warn se houver erro real, não interrompe a app
-          console.warn(`Audio load warning: ${e.currentTarget.error?.message || 'Unknown error'}`);
+            console.error("Erro ao carregar o ficheiro de áudio local (/musica.mp3):", e.currentTarget.error);
         }}
       />
 
