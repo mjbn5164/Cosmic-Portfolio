@@ -19,7 +19,8 @@ const podcastEpisodes = [
 
 const videoItems = [
   { title: "01 - Feliz Natal, alumni!", url: "https://youtu.be/VatEyRKtvRs" },
-  { title: "02 - Banda Desenhada - Vida e Obra do Dr. Hernâni Cidade", url: "https://youtu.be/VtQXm3k-ot4" }
+  { title: "02 - Bom Carnaval, alumni!!", url: "https://youtu.be/sUgSt23DXFs" },
+  { title: "03 - Banda Desenhada - Vida e Obra do Dr. Hernâni Cidade", url: "https://youtu.be/VtQXm3k-ot4" }
 ];
 
 const studentVideoItems = [
@@ -219,7 +220,8 @@ export default function NavigationOverlay() {
         }
         
         .cosmic-button {
-          pointer-events: all; position: relative; width: 240px; height: 48px;
+          /* REMOVIDO pointer-events: all; para ser controlado pelas classes show/hide */
+          position: relative; width: 240px; height: 48px;
           background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px) saturate(160%);
           border: 1px solid rgba(255, 255, 255, 0.1); border-left: 4px solid var(--glow);
           border-radius: 4px; color: white; display: flex; align-items: center; justify-content: center;
@@ -227,8 +229,11 @@ export default function NavigationOverlay() {
           cursor: pointer; transition: 0.4s; overflow: hidden;
           text-decoration: none;
         }
-        .cosmic-button.show { opacity: 1; transform: translateX(0); }
-        .cosmic-button.hide { opacity: 0; transform: translateX(60px); }
+        
+        /* CORREÇÃO MENU FANTASMA: pointer-events dinâmico */
+        .cosmic-button.show { opacity: 1; transform: translateX(0); pointer-events: auto; }
+        .cosmic-button.hide { opacity: 0; transform: translateX(60px); pointer-events: none; }
+        
         .cosmic-button:hover { background: rgba(255, 255, 255, 0.1); }
         .btn-icon { position: absolute; left: 18px; opacity: 0.6; }
 

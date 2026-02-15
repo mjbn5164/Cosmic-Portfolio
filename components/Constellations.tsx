@@ -12,10 +12,17 @@ const Stars = () => {
     const off = [];
     const spd = [];
     for (let i = 0; i < 6000; i++) {
-      // Posição aleatória no espaço
-      pos.push((Math.random() - 0.5) * 1000);
-      pos.push((Math.random() - 0.5) * 1000);
-      pos.push((Math.random() - 0.5) * 1000);
+      // CORREÇÃO: Usar coordenadas cilíndricas para criar um "túnel" seguro.
+      // Raio mínimo de 50 garante que nenhuma estrela intersecta os planetas (que estão perto de 0,0)
+      const r = 50 + Math.random() * 950; 
+      const theta = 2 * Math.PI * Math.random();
+      
+      const x = r * Math.cos(theta);
+      const y = r * Math.sin(theta);
+      // Espalhar bastante no eixo Z para dar profundidade ao scroll
+      const z = (Math.random() - 0.5) * 2000; 
+
+      pos.push(x, y, z);
       
       // Offset (tempo de início) e Velocidade de brilho aleatórios
       off.push(Math.random() * Math.PI * 2); 
@@ -46,8 +53,13 @@ const Stars = () => {
         vOpacity = 0.4 + 0.6 * sin(uTime * aSpeed + aOffset);
         
         vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-        // Faz com que as estrelas mais longe pareçam menores
-        gl_PointSize = uSize * (300.0 / -mvPosition.z);
+        
+        // CORREÇÃO: Clamp (limite) no tamanho máximo da estrela.
+        // min(..., 4.0) garante que a estrela nunca fica maior que 4 pixels, 
+        // mesmo que passe perto da câmera.
+        float size = uSize * (300.0 / -mvPosition.z);
+        gl_PointSize = min(size, 4.0);
+        
         gl_Position = projectionMatrix * mvPosition;
       }
     `,
