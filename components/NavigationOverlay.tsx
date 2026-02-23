@@ -26,7 +26,9 @@ const videoItems = [
 const studentVideoItems = [
   { title: "01 - Sofia Zhuo - Metais da Tabela Periódica: Suas Propriedades e Aplicações", url: "https://youtu.be/_oWNXtW7n_A" },
   { title: "02 - Sofia Zhuo - Metais: Degradação, Proteção e Complexos", url: "https://youtu.be/TAb5-tRDndg" },
-  { title: "03 - SOFIA ZHUO - SCC DR. HERNÂNI CIDADE (2026) - HIDROGÉNIO VERDE", url: "https://youtu.be/lhR2mSZyCyo" }
+  { title: "03 - SOFIA ZHUO - SCC DR. HERNÂNI CIDADE (2026) - HIDROGÉNIO VERDE", url: "https://youtu.be/lhR2mSZyCyo" },
+  { title: "04 - Alice Pita, Diogo Fernandes, Joana Pereira - SCC DR. HERNÂNI CIDADE (2026) - BATERIAS DO ESTADO SÓLIDO", url: "https://youtu.be/--kKgyUEYUA" },
+  { title: "05 - Francisco Queiroz, Henrique Lezama, Luís Capitão e Luís Nunes - SCC DR. HERNÂNI CIDADE (2026) - NANOTECNOLOGIA", url: "https://youtu.be/y3ZB6BQIQGs" }
 ];
 
 const gameItems = [
