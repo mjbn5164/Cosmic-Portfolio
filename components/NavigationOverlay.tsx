@@ -15,12 +15,15 @@ const podcastEpisodes = [
   { title: "03 - Chip Fotónico", url: "https://youtu.be/hNQ9_xlMJAs" },
   { title: "04 - Prémio Nobel da Física (2025)", url: "https://youtu.be/OW-HDBr-uKU" },
   { title: "05 - Podcast Virtual com o Prof. Doutor Hernâni Cidade", url: "https://youtu.be/BhhGYjoJc1w" },
+  { title: "06 - Efeitos da Corrente Elétrica", url: "https://youtu.be/JDU6U92X7rg" }
 ];
 
 const videoItems = [
   { title: "01 - Feliz Natal, alumni!", url: "https://youtu.be/VatEyRKtvRs" },
   { title: "02 - Bom Carnaval, alumni!!", url: "https://youtu.be/sUgSt23DXFs" },
-  { title: "03 - Banda Desenhada - Vida e Obra do Dr. Hernâni Cidade", url: "https://youtu.be/VtQXm3k-ot4" }
+  { title: "03 - Banda Desenhada - Vida e Obra do Dr. Hernâni Cidade", url: "https://youtu.be/VtQXm3k-ot4" },
+  { title: "04 - Andrei Shakarov - Pequena Biografia", url: "https://youtu.be/MFh1y30oSpY" },
+  { title: "05 - Coro Química do 12.º A - Concerto de Páscoa", url: "https://youtu.be/0zQv_DbtSoU" }
 ];
 
 const studentVideoItems = [
@@ -28,7 +31,10 @@ const studentVideoItems = [
   { title: "02 - Sofia Zhuo - Metais: Degradação, Proteção e Complexos", url: "https://youtu.be/TAb5-tRDndg" },
   { title: "03 - SOFIA ZHUO - SCC DR. HERNÂNI CIDADE (2026) - HIDROGÉNIO VERDE", url: "https://youtu.be/lhR2mSZyCyo" },
   { title: "04 - Alice Pita, Diogo Fernandes, Joana Pereira - SCC DR. HERNÂNI CIDADE (2026) - BATERIAS DO ESTADO SÓLIDO", url: "https://youtu.be/--kKgyUEYUA" },
-  { title: "05 - Francisco Queiroz, Henrique Lezama, Luís Capitão e Luís Nunes - SCC DR. HERNÂNI CIDADE (2026) - NANOTECNOLOGIA", url: "https://youtu.be/y3ZB6BQIQGs" }
+  { title: "05 - Francisco Queiroz, Henrique Lezama, Luís Capitão e Luís Nunes - SCC DR. HERNÂNI CIDADE (2026) - NANOTECNOLOGIA", url: "https://youtu.be/y3ZB6BQIQGs" },
+  { title: "06 - Catarina Caraças - Marie Curie", url: "https://youtu.be/DOQpk92HEW0" },
+  { title: "07 - Francisco Queiroz, Henrique Lezama, Luís Capitão e Luís Nunes - Andrei Shakarov", url: "https://youtu.be/cTQU7fbTpow" },
+  { title: "08 - Sofia Zhuo - Chien Shiung Wu", url: "https://youtu.be/IMQlnYgOhCs" }
 ];
 
 const gameItems = [
