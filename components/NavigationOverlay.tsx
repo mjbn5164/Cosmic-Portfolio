@@ -15,7 +15,11 @@ const podcastEpisodes = [
   { title: "03 - Chip Fotónico", url: "https://youtu.be/hNQ9_xlMJAs" },
   { title: "04 - Prémio Nobel da Física (2025)", url: "https://youtu.be/OW-HDBr-uKU" },
   { title: "05 - Podcast Virtual com o Prof. Doutor Hernâni Cidade", url: "https://youtu.be/BhhGYjoJc1w" },
-  { title: "06 - Efeitos da Corrente Elétrica", url: "https://youtu.be/JDU6U92X7rg" }
+  { title: "06 - Efeitos da Corrente Elétrica", url: "https://youtu.be/JDU6U92X7rg" },
+  { title: "07 - Organização da Tabela Periódica", url: "https://youtu.be/pYFsGMUr1Lg" },
+  { title: "08 - Metais e Não Metais", url: "https://youtu.be/ppmsUIeIjso" },
+  { title: "09 - Metais Alcalinos e Alcalinoterrosos", url: "https://youtu.be/XFVbn7ZLuqQ" },
+  { title: "10 - Halogéneos e Gases Nobres. Elementos Químicos no Corpo Humano.", url: "https://youtu.be/qosGVgNnBiI" }
 ];
 
 const videoItems = [
@@ -34,7 +38,8 @@ const studentVideoItems = [
   { title: "05 - Francisco Queiroz, Henrique Lezama, Luís Capitão e Luís Nunes - SCC DR. HERNÂNI CIDADE (2026) - NANOTECNOLOGIA", url: "https://youtu.be/y3ZB6BQIQGs" },
   { title: "06 - Catarina Caraças - Marie Curie", url: "https://youtu.be/DOQpk92HEW0" },
   { title: "07 - Francisco Queiroz, Henrique Lezama, Luís Capitão e Luís Nunes - Andrei Shakarov", url: "https://youtu.be/cTQU7fbTpow" },
-  { title: "08 - Sofia Zhuo - Chien Shiung Wu", url: "https://youtu.be/IMQlnYgOhCs" }
+  { title: "08 - Sofia Zhuo - Chien Shiung Wu", url: "https://youtu.be/IMQlnYgOhCs" },
+  { title: "09 - Carolina Guerreiro - Lise Meitner", url: "https://youtu.be/5xL1mjEsKm8" }
 ];
 
 const gameItems = [
