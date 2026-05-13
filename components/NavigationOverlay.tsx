@@ -6,7 +6,7 @@ const menuItems = [
   { label: "Vídeos", color: "rgba(255, 69, 0, 0.6)", icon: "🎬" },
   { label: "Vídeos: Alunos", color: "rgba(224, 174, 111, 0.6)", icon: "🎓" },
   { label: "Jogos", color: "rgba(223, 208, 181, 0.6)", icon: "🎮" },
-  { label: "Em Construção", color: "rgba(175, 238, 238, 0.6)", icon: "🏗️" }
+  { label: "Bandas Desenhadas", color: "rgba(175, 238, 238, 0.6)", icon: "📚" }
 ];
 
 const podcastEpisodes = [
@@ -16,10 +16,14 @@ const podcastEpisodes = [
   { title: "04 - Prémio Nobel da Física (2025)", url: "https://youtu.be/OW-HDBr-uKU" },
   { title: "05 - Podcast Virtual com o Prof. Doutor Hernâni Cidade", url: "https://youtu.be/BhhGYjoJc1w" },
   { title: "06 - Efeitos da Corrente Elétrica", url: "https://youtu.be/JDU6U92X7rg" },
-  { title: "07 - Organização da Tabela Periódica", url: "https://youtu.be/pYFsGMUr1Lg" },
-  { title: "08 - Metais e Não Metais", url: "https://youtu.be/ppmsUIeIjso" },
-  { title: "09 - Metais Alcalinos e Alcalinoterrosos", url: "https://youtu.be/XFVbn7ZLuqQ" },
-  { title: "10 - Halogéneos e Gases Nobres. Elementos Químicos no Corpo Humano.", url: "https://youtu.be/qosGVgNnBiI" }
+  { title: "07 - Estrutura Atómica", url: "https://youtu.be/-nXaXyVGT8k" },
+  { title: "08 - Distribuição Eletrónica de Átomos e Iões", url: "https://youtu.be/ZyoTgP7JTi4" },
+  { title: "09 - Organização da Tabela Periódica", url: "https://youtu.be/pYFsGMUr1Lg" },
+  { title: "10 - Metais e Não Metais", url: "https://youtu.be/ppmsUIeIjso" },
+  { title: "11 - Metais Alcalinos e Alcalinoterrosos", url: "https://youtu.be/XFVbn7ZLuqQ" },
+  { title: "12 - Halogéneos e Gases Nobres. Elementos Químicos no Corpo Humano.", url: "https://youtu.be/qosGVgNnBiI" },
+  { title: "13 - Ligação Química. Ligação Covalente, Iónica e Metálica", url: "https://youtu.be/e5mLcRUKWpc" },
+  { title: "14 - Hidrocarbonetos Saturados e Insaturados", url: "https://youtu.be/2b0hhC4P3VA" }
 ];
 
 const videoItems = [
@@ -45,6 +49,19 @@ const studentVideoItems = [
 const gameItems = [
   { title: "01 - 9.º ano - M9 - Impulsão", url: "https://manuel-nita-9ano-impulsao-9sao.vercel.app/" },
   { title: "02 - 9.º ano - M10 - Circuitos Elétricos Simples", url: "https://manuel-nita-9ano-circuitoseletricos.vercel.app/" }
+];
+
+const comicsItems = [
+  { title: "01 - O Mistério da Potência (M12 - Física)", url: "https://pdfhost.io/pt-PT/v/jKBcN9XWbM_O_mistério_da_potência" },
+  { title: "02 - O Mistério da Estrutura Atómica (M13 - Química)", url: "https://pdfhost.io/pt-PT/v/YGe8xyzREW_O_Mistério_da_Estrutura_Atómica__M13_-_Química_" },
+  { title: "03 - Distribuição Eletrónica de Átomo e Iões (M14 - Química)", url: "https://pdfhost.io/pt-PT/v/scGzz3KRg3_M14_-_Distribuição_Eletrónica_de_Átomo_e_Iões" },
+  { title: "04 - Organização da Tabela Periódica (M15 - Química)", url: "https://pdfhost.io/pt-PT/v/vWbUHd8YeY_M15_-_Organização_da_Tabela_Periódica" },
+  { title: "05 - Metais e Não Metais (M16 - Química)", url: "https://pdfhost.io/pt-PT/v/rrnhHTM5jK_Metais_e_Não_Metais" },
+  { title: "06 - Metais e Não Metais (M16 - Química)", url: "https://pdfhost.io/pt-PT/v/zZhJpdtJju_M16_-_Metais_e_Não_Metais" },
+  { title: "07 - Metais Alcalinos e Alcalinoterrosos (M17 - Química)", url: "https://pdfhost.io/pt-PT/v/wF7zb8cXMk_M17_-_Metais_Alcalinos_e_Alcalinoterroros" },
+  { title: "08 - Halogénios. Gases Nobres. Elementos Químicos no Corpo Humano (M18 - Química)", url: "https://pdfhost.io/pt-PT/v/k7xAaY7QuE_M18_-_Halogénios__Gases_nobres__Elementos_Químicos_no_Corpo_Humano_" },
+  { title: "09 - Ligação Química. Ligação Covalente, ligação iónica e ligação metálica (M19 - Química)", url: "https://pdfhost.io/pt-PT/v/Dn3DHWwYuk_M19_-_Ligação_Química__Ligação_covalente__ligação_iónica_e_ligação_metálica_" },
+  { title: "10 - Hidrocarbonetos Saturados e Insaturados (M20 - Química)", url: "https://pdfhost.io/pt-PT/v/LjRcLhsT3e_M20_-_Hidrocarbonetos_Saturados_e_Insaturados" }
 ];
 
 export default function NavigationOverlay() {
@@ -204,7 +221,7 @@ export default function NavigationOverlay() {
       // Botão 4: Jogos (Dourado Pálido/Saturno)
       setIsGamesOpen(true);
     } else if (index === 5) {
-      // Botão 5: Em Construção (Ciano Pálido/Urano)
+      // Botão 5: Bandas Desenhadas (Ciano Pálido/Urano)
       setIsConstructionOpen(true);
     }
   };
@@ -306,8 +323,7 @@ export default function NavigationOverlay() {
         /* Overlay da Terra (Podcast) */
         .earth-overlay {
           position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-          background: black url('/paisagem_Terra.png') no-repeat center center;
-          background-size: cover;
+          background: transparent;
           z-index: 20000; display: flex; align-items: center; justify-content: center;
           opacity: ${isPodcastOpen ? '1' : '0'};
           visibility: ${isPodcastOpen ? 'visible' : 'hidden'};
@@ -318,7 +334,7 @@ export default function NavigationOverlay() {
         /* Overlay de Marte (Vídeos) */
         .mars-overlay {
           position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-          background: radial-gradient(circle at center, #3a1103 0%, #000000 90%);
+          background: transparent;
           z-index: 20000; display: flex; align-items: center; justify-content: center;
           opacity: ${isVideoOpen ? '1' : '0'};
           visibility: ${isVideoOpen ? 'visible' : 'hidden'};
@@ -329,7 +345,7 @@ export default function NavigationOverlay() {
         /* Overlay de Júpiter (Vídeos: Alunos) */
         .jupiter-overlay {
           position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-          background: radial-gradient(circle at center, #8b6c42 0%, #2b1d0e 60%, #000000 90%);
+          background: transparent;
           z-index: 20000; display: flex; align-items: center; justify-content: center;
           opacity: ${isStudentVideoOpen ? '1' : '0'};
           visibility: ${isStudentVideoOpen ? 'visible' : 'hidden'};
@@ -340,7 +356,7 @@ export default function NavigationOverlay() {
         /* Overlay de Saturno (Jogos) */
         .saturn-overlay {
           position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-          background: radial-gradient(circle at center, #dfd0b5 0%, #3e3b32 60%, #000000 90%);
+          background: transparent;
           z-index: 20000; display: flex; align-items: center; justify-content: center;
           opacity: ${isGamesOpen ? '1' : '0'};
           visibility: ${isGamesOpen ? 'visible' : 'hidden'};
@@ -420,7 +436,21 @@ export default function NavigationOverlay() {
 
       {/* OVERLAY DE PODCAST (TERRA) */}
       <div className="earth-overlay">
-        <div className="podcast-box">
+        {/* Fundo do Podcast */}
+        <img 
+          src="/gaia.png" 
+          alt="Fundo Gaia" 
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -1 }}
+        />
+        <div 
+          className="podcast-box"
+          style={{ 
+              background: 'rgba(0, 0, 0, 0.2)', 
+              backdropFilter: 'blur(5px)', 
+              border: '1px solid rgba(175, 238, 238, 0.2)', 
+              boxShadow: '0 20px 50px rgba(0,0,0,0.8)' 
+          }}
+        >
           <h2 style={{ letterSpacing: '1rem', fontSize: '1.8rem', marginBottom: '5px' }}>GAIA</h2>
           <p style={{ fontSize: '9px', opacity: 0.6, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '40px' }}>Transmissões da Biosfera</p>
           
@@ -443,7 +473,21 @@ export default function NavigationOverlay() {
 
       {/* OVERLAY DE VÍDEOS (MARTE) */}
       <div className="mars-overlay">
-        <div className="podcast-box">
+        {/* Fundo de Marte */}
+        <img 
+          src="/marte.png" 
+          alt="Fundo Marte" 
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -1 }}
+        />
+        <div 
+          className="podcast-box"
+          style={{ 
+              background: 'rgba(0, 0, 0, 0.2)', 
+              backdropFilter: 'blur(5px)', 
+              border: '1px solid rgba(255, 69, 0, 0.2)', 
+              boxShadow: '0 20px 50px rgba(0,0,0,0.8)' 
+          }}
+        >
           <h2 style={{ letterSpacing: '1rem', fontSize: '1.8rem', marginBottom: '5px', color: '#ff4500' }}>MARTE</h2>
           <p style={{ fontSize: '9px', opacity: 0.6, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '40px' }}>Arquivos Visuais</p>
           
@@ -466,7 +510,21 @@ export default function NavigationOverlay() {
 
       {/* OVERLAY DE VÍDEOS: ALUNOS (JUPITER) */}
       <div className="jupiter-overlay">
-        <div className="podcast-box">
+        {/* Fundo de Júpiter */}
+        <img 
+          src="/jupiter.png" 
+          alt="Fundo Júpiter" 
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -1 }}
+        />
+        <div 
+          className="podcast-box"
+          style={{ 
+              background: 'rgba(0, 0, 0, 0.2)', 
+              backdropFilter: 'blur(5px)', 
+              border: '1px solid rgba(224, 174, 111, 0.2)', 
+              boxShadow: '0 20px 50px rgba(0,0,0,0.8)' 
+          }}
+        >
           <h2 style={{ letterSpacing: '1rem', fontSize: '1.8rem', marginBottom: '5px', color: '#e0ae6f' }}>JÚPITER</h2>
           <p style={{ fontSize: '9px', opacity: 0.6, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '40px' }}>Registos da Academia</p>
           
@@ -498,7 +556,21 @@ export default function NavigationOverlay() {
 
       {/* OVERLAY DE JOGOS (SATURNO) */}
       <div className="saturn-overlay">
-        <div className="podcast-box">
+        {/* Fundo de Saturno */}
+        <img 
+          src="/saturno.png" 
+          alt="Fundo Saturno" 
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -1 }}
+        />
+        <div 
+          className="podcast-box"
+          style={{ 
+              background: 'rgba(0, 0, 0, 0.2)', 
+              backdropFilter: 'blur(5px)', 
+              border: '1px solid rgba(223, 208, 181, 0.2)', 
+              boxShadow: '0 20px 50px rgba(0,0,0,0.8)' 
+          }}
+        >
           <h2 style={{ letterSpacing: '1rem', fontSize: '1.8rem', marginBottom: '5px', color: '#dfd0b5' }}>SATURNO</h2>
           <p style={{ fontSize: '9px', opacity: 0.6, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '40px' }}>Simulações Interativas</p>
           
@@ -528,28 +600,46 @@ export default function NavigationOverlay() {
         </div>
       </div>
 
-      {/* OVERLAY DE CONSTRUÇÃO (URANO/IMAGEM DE MARTE) */}
+      {/* OVERLAY DE BANDAS DESENHADAS */}
       <div className="construction-overlay">
-        {/* Usamos img tag direta em vez de CSS background para garantir o carregamento correto */}
+        {/* Fundo da Banda Desenhada */}
         <img 
-          src="/paisagemmarte.jpg" 
-          alt="Paisagem de Marte" 
+          src="/banda-desenhada.png" 
+          alt="Fundo Banda Desenhada" 
           style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -1 }}
         />
         <div 
             className="podcast-box" 
             style={{ 
-                background: 'rgba(0, 0, 0, 0.05)', 
-                backdropFilter: 'none', 
-                border: 'none', 
-                boxShadow: 'none' 
+                background: 'rgba(0, 0, 0, 0.2)', 
+                backdropFilter: 'blur(5px)', 
+                border: '1px solid rgba(175, 238, 238, 0.2)', 
+                boxShadow: '0 20px 50px rgba(0,0,0,0.8)' 
             }}
         >
-          <h2 style={{ letterSpacing: '1rem', fontSize: '1.8rem', marginBottom: '5px', color: '#afeeee' }}>EM CONSTRUÇÃO</h2>
-          <p style={{ fontSize: '9px', opacity: 0.6, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '40px' }}>Exploração Futura</p>
+          <h2 style={{ letterSpacing: '1rem', fontSize: '1.8rem', marginBottom: '5px', color: '#afeeee' }}>BANDAS DESENHADAS</h2>
+          <p style={{ fontSize: '9px', opacity: 0.6, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '40px' }}>Narrativas Visuais</p>
           
-          <div className="text-sm text-gray-300 font-light" style={{ marginBottom: '30px' }}>
-             Esta área do sistema está a ser mapeada.
+          <div className="episode-list">
+            {comicsItems.map((item, i) => (
+              <button 
+                key={i} 
+                onClick={() => openLink(item.url)}
+                className="cosmic-button" 
+                style={{ 
+                  width: '100%', 
+                  height: 'auto', 
+                  minHeight: '48px', 
+                  padding: '12px 20px', 
+                  lineHeight: '1.4', 
+                  textAlign: 'center', 
+                  '--glow': 'rgba(175, 238, 238, 0.8)', 
+                  justifyContent: 'center' 
+                } as React.CSSProperties}
+              >
+                {item.title}
+              </button>
+            ))}
           </div>
 
           <button className="back-btn" onClick={() => setIsConstructionOpen(false)}>Regressar à Missão</button>
