@@ -31,7 +31,8 @@ const videoItems = [
   { title: "02 - Bom Carnaval, alumni!!", url: "https://youtu.be/sUgSt23DXFs" },
   { title: "03 - Banda Desenhada - Vida e Obra do Dr. Hernâni Cidade", url: "https://youtu.be/VtQXm3k-ot4" },
   { title: "04 - Andrei Shakarov - Pequena Biografia", url: "https://youtu.be/MFh1y30oSpY" },
-  { title: "05 - Coro Química do 12.º A - Concerto de Páscoa", url: "https://youtu.be/0zQv_DbtSoU" }
+  { title: "05 - Coro Química do 12.º A - Concerto de Páscoa", url: "https://youtu.be/0zQv_DbtSoU" },
+  { title: "06 - Gerações dos Direitos Humanos (DAC Economia/Química - 12.º ano)", url: "https://youtu.be/a8n5y1r2iR0" }
 ];
 
 const studentVideoItems = [
@@ -48,7 +49,8 @@ const studentVideoItems = [
 
 const gameItems = [
   { title: "01 - 9.º ano - M9 - Impulsão", url: "https://manuel-nita-9ano-impulsao-9sao.vercel.app/" },
-  { title: "02 - 9.º ano - M10 - Circuitos Elétricos Simples", url: "https://manuel-nita-9ano-circuitoseletricos.vercel.app/" }
+  { title: "02 - 9.º ano - M10 - Circuitos Elétricos Simples", url: "https://manuel-nita-9ano-circuitoseletricos.vercel.app/" },
+  { title: "03 - 9.º ano - [M13-M19] - Química", url: "https://quem-quer-ser-milionario-com-a-tp.netlify.app/" }
 ];
 
 const comicsItems = [
