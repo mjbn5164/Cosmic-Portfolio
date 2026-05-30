@@ -44,7 +44,11 @@ const studentVideoItems = [
   { title: "06 - Catarina Caraças - Marie Curie", url: "https://youtu.be/DOQpk92HEW0" },
   { title: "07 - Francisco Queiroz, Henrique Lezama, Luís Capitão e Luís Nunes - Andrei Shakarov", url: "https://youtu.be/cTQU7fbTpow" },
   { title: "08 - Sofia Zhuo - Chien Shiung Wu", url: "https://youtu.be/IMQlnYgOhCs" },
-  { title: "09 - Carolina Guerreiro - Lise Meitner", url: "https://youtu.be/5xL1mjEsKm8" }
+  { title: "09 - Carolina Guerreiro - Lise Meitner", url: "https://youtu.be/5xL1mjEsKm8" },
+  { title: "10 - Alice Pita, Diogo Fernandes, Joana Pereira - A Penicilina", url: "https://youtu.be/5K-fe9Tfzjw" },
+  { title: "11 - Sofia Zhuo - A Sacarina", url: "https://youtu.be/vMjPVlougzg" },
+  { title: "12 - Catarina Caraças - A Aspirina", url: "https://youtu.be/HqoL-S1Gblw" },
+  { title: "13 - Francisco Queiroz, Henrique Lezama, Luís Capitão e Luís Nunes - O DDT", url: "https://youtu.be/F5X9btLwWbo" }
 ];
 
 const gameItems = [
