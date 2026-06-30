@@ -23,7 +23,8 @@ const podcastEpisodes = [
   { title: "11 - Metais Alcalinos e Alcalinoterrosos", url: "https://youtu.be/XFVbn7ZLuqQ" },
   { title: "12 - Halogéneos e Gases Nobres. Elementos Químicos no Corpo Humano.", url: "https://youtu.be/qosGVgNnBiI" },
   { title: "13 - Ligação Química. Ligação Covalente, Iónica e Metálica", url: "https://youtu.be/e5mLcRUKWpc" },
-  { title: "14 - Hidrocarbonetos Saturados e Insaturados", url: "https://youtu.be/2b0hhC4P3VA" }
+  { title: "14 - Hidrocarbonetos Saturados e Insaturados", url: "https://youtu.be/2b0hhC4P3VA" },
+  { title: "15 - E se não Houvesse Lua?", url: "https://youtu.be/LLSpaXnfshc" }
 ];
 
 const videoItems = [
@@ -32,7 +33,8 @@ const videoItems = [
   { title: "03 - Banda Desenhada - Vida e Obra do Dr. Hernâni Cidade", url: "https://youtu.be/VtQXm3k-ot4" },
   { title: "04 - Andrei Shakarov - Pequena Biografia", url: "https://youtu.be/MFh1y30oSpY" },
   { title: "05 - Coro Química do 12.º A - Concerto de Páscoa", url: "https://youtu.be/0zQv_DbtSoU" },
-  { title: "06 - Gerações dos Direitos Humanos (DAC Economia/Química - 12.º ano)", url: "https://youtu.be/a8n5y1r2iR0" }
+  { title: "06 - Gerações dos Direitos Humanos (DAC Economia/Química - 12.º ano)", url: "https://youtu.be/a8n5y1r2iR0" },
+  { title: "07 - O Paradoxo de Fermi", url: "https://youtu.be/pOibbMGcn9E" }
 ];
 
 const studentVideoItems = [
